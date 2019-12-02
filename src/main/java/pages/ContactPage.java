@@ -1,20 +1,13 @@
 package pages;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import webdriversingleton.WebDriverSingleton;
-
-import java.nio.charset.Charset;
 import java.util.Random;
 
 public class ContactPage extends BasePage {
-    WebDriver driver = WebDriverSingleton.create();
-
     public ContactPage() {
         PageFactory.initElements(driver, this);
     }

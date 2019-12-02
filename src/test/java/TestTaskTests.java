@@ -6,6 +6,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.BasePage;
 import pages.ContactPage;
+import pages.FindDealerPage;
 import webdriversingleton.WebDriverSingleton;
 
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,7 @@ public class TestTaskTests {
     WebDriver driver;
     BasePage basePage;
     ContactPage contactPage;
+    FindDealerPage findDealerPage;
 
     @BeforeMethod
     @Parameters({"browserName", "isHeadless"})
@@ -47,11 +49,23 @@ public class TestTaskTests {
     public void howCanWeHelpTest() {
         basePage = new BasePage();
         contactPage = new ContactPage();
+
         basePage.goToContactPage();
         contactPage.scrollToSendMoreInformationForm();
         contactPage.fillFormWithRandomData();
         contactPage.submitForm();
         Assert.assertTrue(contactPage.isContactUsFormSendSuccessfully(), "Contact us page should send successfully");
+
+    }
+
+    @Test
+    public void locationSearchTest() {
+        basePage = new BasePage();
+        findDealerPage = new FindDealerPage();
+
+        basePage.goToDealerPage();
+        findDealerPage.searchItem("truck");
+        Assert.assertTrue(findDealerPage.isTruckItemDisplayed(), "Result of search should be correct");
 
     }
 

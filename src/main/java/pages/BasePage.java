@@ -20,6 +20,29 @@ public class BasePage {
     }
     WebDriverWait wait = new WebDriverWait(driver, 5);
 
+    Actions builder = new Actions(driver);
+
+    @FindBy (css = "a[href='/we-are-wabash']")
+    WebElement weAreWabashLink;
+
+    @FindBy (css = "a[href='/tradition-of-innovation']")
+    WebElement traditionOfInnovationLink;
+
+    @FindBy (css = "a[href='/our-products']")
+    WebElement ourProductsLink;
+
+    @FindBy (css = "a[href='/our-brands']")
+    WebElement ourBrandsLink;
+
+    @FindBy (css = "a[href='/work-with-wabash']")
+    WebElement workWithWabashLink;
+
+    @FindBy (css = "a[href='/timeline']")
+    WebElement timeLineLink;
+
+    @FindBy (css = "a[href='/location-search']")
+    WebElement locationSearchLink;
+
     @FindAll({
             @FindBy (css = "li.dropdown, a[href='/timeline']")
            // @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]/li")
@@ -32,12 +55,13 @@ public class BasePage {
     })
     List<WebElement> dropDownItems;
 
-    @FindBy (xpath = "//a[@href='/small-menu/contact']")
+    @FindBy (css = "a[href='/small-menu/contact']")
     WebElement contactPageLink;
 
+    @FindBy (css = "a[href='/location-search/dealer']")
+    WebElement dealerLink;
 
     public void navigateThroughRandomItemsFromEachSection() {
-        Actions builder = new Actions(driver);
         Random random = new Random();
         List<WebElement> childItems;
         int count = 0;
@@ -76,5 +100,9 @@ public class BasePage {
 
     public void goToContactPage() {
         contactPageLink.click();
+    }
+
+    public void goToDealerPage() {
+        builder.moveToElement(locationSearchLink).click(dealerLink).perform();
     }
 }
