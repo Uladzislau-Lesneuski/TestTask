@@ -55,7 +55,6 @@ public class TestTaskTests {
         contactPage.fillFormWithRandomData();
         contactPage.submitForm();
         Assert.assertTrue(contactPage.isContactUsFormSendSuccessfully(), "Contact us page should send successfully");
-
     }
 
     @Test
@@ -67,6 +66,23 @@ public class TestTaskTests {
         findDealerPage.searchItem("truck");
         Assert.assertTrue(findDealerPage.isTruckItemDisplayed(), "Result of search should be correct");
 
+    }
+
+    @Test
+    public void differentQuantityInSearchResultWhenChangingRadius() {
+        basePage = new BasePage();
+        findDealerPage = new FindDealerPage();
+
+        basePage.goToDealerPage();
+        int initialQuantity = findDealerPage.getSearchItemsQuantity();
+
+        findDealerPage.setSliderToMaxPosition();
+        int maxQuantity = findDealerPage.getSearchItemsQuantity();
+        Assert.assertNotEquals(initialQuantity, maxQuantity, "Quantity of search items should be different");
+
+        findDealerPage.setSliderToDefaultPosition();
+        int newQuantity = findDealerPage.getSearchItemsQuantity();
+        Assert.assertEquals(initialQuantity, newQuantity, "Quantities should be equal");
     }
 
 }
