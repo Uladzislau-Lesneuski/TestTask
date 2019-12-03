@@ -54,10 +54,10 @@ public class TestTaskTests {
         contactPage.scrollToSendMoreInformationForm();
         contactPage.fillFormWithRandomData();
         contactPage.submitForm();
-        Assert.assertTrue(contactPage.isContactUsFormSendSuccessfully(), "Contact us page should send successfully");
+        Assert.assertTrue(contactPage.isContactUsFormSendSuccessfully(), "Contact us page should sends successfully");
     }
 
-    @Test
+    @Test (groups = "location")
     public void locationSearchTest() {
         basePage = new BasePage();
         findDealerPage = new FindDealerPage();
@@ -68,7 +68,7 @@ public class TestTaskTests {
 
     }
 
-    @Test
+    @Test (groups = "location")
     public void differentQuantityInSearchResultWhenChangingRadius() {
         basePage = new BasePage();
         findDealerPage = new FindDealerPage();
@@ -85,16 +85,20 @@ public class TestTaskTests {
         Assert.assertEquals(initialQuantity, newQuantity, "Quantities should be equal");
     }
 
-    @Test
+    @Test (groups = "location")
     public void clearAllFilters() {
         basePage = new BasePage();
         findDealerPage = new FindDealerPage();
 
         basePage.goToDealerPage();
         findDealerPage.fillFieldsWithRandomData();
+        findDealerPage.checkAllCheckboxes();
+        findDealerPage.setSliderToMaxPosition();
+        findDealerPage.clearFilters();
 
-        int d = 0;
-
+        Assert.assertTrue(findDealerPage.isAllCheckboxUnchecked(), "All checkboxes should be unchecked");
+        Assert.assertTrue(findDealerPage.isSearchFieldsAreEmpty(), "Search fields should be empty");
+        Assert.assertFalse(findDealerPage.isSliderInDefaultPosition(), "Slider not in default position");
     }
 
 }

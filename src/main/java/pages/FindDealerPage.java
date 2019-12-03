@@ -1,12 +1,12 @@
 package pages;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class FindDealerPage extends BasePage {
     public FindDealerPage() {
@@ -30,6 +30,17 @@ public class FindDealerPage extends BasePage {
 
     @FindBy (xpath = "//div[@class='noUi-base']")
     WebElement sliderRadius;
+
+    @FindAll({
+            @FindBy (xpath = "//span[@class='rbIcon p-icon p-i-checkbox rbToggleCheckbox']")
+    })
+    List <WebElement> allCheckboxes;
+
+    @FindBy (id = "clear")
+    WebElement clearAllFilters;
+
+    @FindBy (xpath = "//div[@class='rs_tooltip']/span")
+    WebElement sliderValue;
 
 
     public boolean isTruckItemDisplayed() {
@@ -64,5 +75,38 @@ public class FindDealerPage extends BasePage {
     public void fillFieldsWithRandomData() {
         companyNameField.sendKeys(generateRandomString(10));
         locationField.sendKeys(generateRandomString(10));
+    }
+
+    public void checkAllCheckboxes() {
+        for (WebElement checkboxes: allCheckboxes) {
+            checkboxes.click();
+        }
+    }
+
+    public void clearFilters() {
+        clearAllFilters.click();
+    }
+
+    public boolean isAllCheckboxUnchecked() {
+        Boolean flag = false;
+        for (WebElement checkboxes: allCheckboxes) {
+            if (!checkboxes.isSelected())
+                flag = true;
+            else
+                flag = false;
+
+        }
+        return flag;
+    }
+
+    public boolean isSearchFieldsAreEmpty() {
+        if ((companyNameField.getAttribute("value").isEmpty()) && (locationField.getAttribute("value").isEmpty()))
+            return true;
+        else
+            return false;
+    }
+
+    public boolean isSliderInDefaultPosition() {
+        return (Integer.parseInt(sliderValue.getText().split(" ")[0]) == 500);
     }
 }
