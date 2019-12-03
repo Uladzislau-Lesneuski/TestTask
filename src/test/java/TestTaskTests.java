@@ -85,4 +85,16 @@ public class TestTaskTests {
         Assert.assertEquals(initialQuantity, newQuantity, "Quantities should be equal");
     }
 
+    @Test
+    public void clearAllFilters() {
+        basePage = new BasePage();
+        findDealerPage = new FindDealerPage();
+
+        basePage.goToDealerPage();
+        findDealerPage.fillFieldsWithRandomData();
+
+        int d = 0;
+
+    }
+
 }

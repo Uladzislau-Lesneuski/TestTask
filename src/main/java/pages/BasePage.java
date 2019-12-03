@@ -61,6 +61,23 @@ public class BasePage {
     @FindBy (css = "a[href='/location-search/dealer']")
     WebElement dealerLink;
 
+    public static String generateRandomString(int length) {
+        Random random = new Random();
+        String lower = "abcdefghijklmnopqrstuvwxyz";
+        String upper = lower.toUpperCase();
+        String number = "0123456789";
+        String finalString = lower + upper + number;
+        if (length < 1) throw new IllegalArgumentException();
+
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int rndCharAt = random.nextInt(finalString.length());
+            char rndChar = finalString.charAt(rndCharAt);
+            sb.append(rndChar);
+        }
+        return sb.toString();
+    }
+
     public void navigateThroughRandomItemsFromEachSection() {
         Random random = new Random();
         List<WebElement> childItems;

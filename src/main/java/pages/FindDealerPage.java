@@ -14,7 +14,10 @@ public class FindDealerPage extends BasePage {
     }
 
     @FindBy (id = "CompanyName")
-    WebElement searchField;
+    WebElement companyNameField;
+
+    @FindBy (id = "ContentPlaceHolderContent_C001_txtSourceZip")
+    WebElement locationField;
 
     @FindBy (xpath = "//h2/a[contains(text(), 'Truck')]")
     WebElement truckItem;
@@ -34,15 +37,14 @@ public class FindDealerPage extends BasePage {
     }
 
     public void searchItem(String searchItem) {
-        wait.until(ExpectedConditions.visibilityOf(searchField));
-        searchField.sendKeys(searchItem);
+        wait.until(ExpectedConditions.visibilityOf(companyNameField));
+        companyNameField.sendKeys(searchItem);
     }
 
     public int getSearchItemsQuantity() {
         wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
         return Integer.parseInt(quantityOfSearchItems.getText().split(" ")[0]);
     }
-
 
     public void setSliderToMaxPosition() {
         builder.moveToElement(slider).clickAndHold()
@@ -51,23 +53,16 @@ public class FindDealerPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
     }
 
-    public void setSliderToMinPosition() {
-        builder.moveToElement(slider).clickAndHold()
-                .moveByOffset(0, 0)
-                .release().perform();
-        wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
-    }
-
     public void setSliderToDefaultPosition() {
         builder.moveToElement(slider).clickAndHold()
-                .moveByOffset((sliderRadius.getSize().getWidth()) / 2, 0)
+                .moveByOffset(-(sliderRadius.getSize().getWidth() / 2), 0)
                 .release().perform();
         wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
     }
 
 
-
-    public int getSliderLocation() {
-        return sliderRadius.getLocation().getX();
+    public void fillFieldsWithRandomData() {
+        companyNameField.sendKeys(generateRandomString(10));
+        locationField.sendKeys(generateRandomString(10));
     }
 }

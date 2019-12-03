@@ -36,24 +36,6 @@ public class ContactPage extends BasePage {
     @FindBy (id = "ContentPlaceHolderContent_TC9310CFE024_ctl00_ctl00_successMessage")
     WebElement successMesssage;
 
-    public static String generateRandomString(int length) {
-        Random random = new Random();
-        String lower = "abcdefghijklmnopqrstuvwxyz";
-        String upper = lower.toUpperCase();
-        String number = "0123456789";
-        String finalString = lower + upper + number;
-        if (length < 1) throw new IllegalArgumentException();
-
-        StringBuilder sb = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            int rndCharAt = random.nextInt(finalString.length());
-            char rndChar = finalString.charAt(rndCharAt);
-            sb.append(rndChar);
-        }
-        return sb.toString();
-    }
-
-
     public void scrollToSendMoreInformationForm() {
         wait.until(ExpectedConditions.visibilityOf(titleOfForm));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", titleOfForm);
