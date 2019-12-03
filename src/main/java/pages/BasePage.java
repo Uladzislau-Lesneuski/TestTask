@@ -10,6 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriversingleton.WebDriverSingleton;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 public class BasePage {
@@ -44,10 +48,9 @@ public class BasePage {
     WebElement locationSearchLink;
 
     @FindAll({
-            @FindBy (css = "li.dropdown, a[href='/timeline']")
-           // @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]/li")
+            @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]//li/a")
     })
-    List<WebElement> mainMenuSections;
+    List<WebElement> allMenuLinks;
 
     @FindAll({
             @FindBy (css = "ul[id*='childNodesContainer'] a")
@@ -78,23 +81,64 @@ public class BasePage {
         return sb.toString();
     }
 
+    public List<String> collectAllLinks(){
+        List<String> links = new ArrayList<>();
+        for (WebElement items: allMenuLinks) {
+            builder.moveToElement(items).perform();
+            links.add(items.getAttribute("href"));
+        }
+
+        return links;
+    }
+
+
+    public boolean checkLinksResponse(List<String> links) {
+        Boolean flag = false;
+        HttpURLConnection httpURLConnection;
+        int responseCode;
+
+        for (String url: links) {
+            try {
+                httpURLConnection = (HttpURLConnection) (new URL(url).openConnection());
+                httpURLConnection.connect();
+
+                responseCode = httpURLConnection.getResponseCode();
+
+                httpURLConnection.disconnect();
+
+                if(responseCode >= 400){
+                    System.out.println(url + " Link is broken");
+                    flag = true;
+                }
+                else{
+                    System.out.println(url + " Link is valid");
+                    flag = false;
+                }
+            }
+            catch(IOException exp) {
+                exp.printStackTrace();
+            }
+        }
+        return flag;
+    }
+
     public void navigateThroughRandomItemsFromEachSection() {
         Random random = new Random();
-        List<WebElement> childItems;
+        List<WebElement> subCategory;
         int count = 0;
 
 
-        for (WebElement sections: mainMenuSections) {
+        for (WebElement sections: allMenuLinks) {
 
             System.out.println("Section name: " + sections.getText() + "->");
             builder.moveToElement(sections).perform();
 
-            childItems = sections.findElements(By.cssSelector("ul[id*='childNodesContainer'] a"));
+            subCategory = sections.findElements(By.cssSelector("ul[id*='childNodesContainer'] a"));
             //childItems = sections.findElements(By.xpath("//ul[contains(@id, 'childNodesContainer')]//a"));
 
-            for (int i = 0; i < childItems.size(); i++) {
-                builder.moveToElement(childItems.get(i)).perform();
-                System.out.print("***" + childItems.get(i).getText() + " : ");
+            for (int i = 0; i < subCategory.size(); i++) {
+                builder.moveToElement(subCategory.get(i)).perform();
+                System.out.print("***" + subCategory.get(i).getText() + " : ");
                 System.out.println();
                 count++;
             }
@@ -120,6 +164,7 @@ public class BasePage {
     }
 
     public void goToDealerPage() {
-        builder.moveToElement(locationSearchLink).click(dealerLink).perform();
-    }
+            builder.moveToElement(locationSearchLink).click(dealerLink).perform();
+        }
+
 }

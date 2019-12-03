@@ -9,6 +9,7 @@ import pages.ContactPage;
 import pages.FindDealerPage;
 import webdriversingleton.WebDriverSingleton;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TestTaskTests {
@@ -43,6 +44,14 @@ public class TestTaskTests {
 
         int d = 0;
 
+    }
+
+    @Test
+    public void checkResponseOfAllMenuLinks() {
+        basePage = new BasePage();
+
+        List<String> links = basePage.collectAllLinks();
+        Assert.assertFalse(basePage.checkLinksResponse(links), "Main menu items contain broken links");
     }
 
     @Test
@@ -98,7 +107,7 @@ public class TestTaskTests {
 
         Assert.assertTrue(findDealerPage.isAllCheckboxUnchecked(), "All checkboxes should be unchecked");
         Assert.assertTrue(findDealerPage.isSearchFieldsAreEmpty(), "Search fields should be empty");
-        Assert.assertFalse(findDealerPage.isSliderInDefaultPosition(), "Slider not in default position");
+        Assert.assertFalse(findDealerPage.isSliderInDefaultPosition(), "Slider is not in default position");
     }
 
 }
