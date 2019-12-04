@@ -46,37 +46,37 @@ public class TestTaskTests {
         basePage = new BasePage();
         contentPage = new ContentPage();
 
-        basePage.goToOurLeadershipPage();
+        leadershipPage = basePage.goToOurLeadershipPage();
         Assert.assertEquals(leadershipPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 leadershipPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
-        basePage.goToFuelEconomyPage();
+        fuelEconomyPage = basePage.goToFuelEconomyPage();
         Assert.assertEquals(fuelEconomyPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 fuelEconomyPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
-        basePage.goToPatentsAndTestCenterPage();
+        patentsAndTestCenterPage = basePage.goToPatentsAndTestCenterPage();
         Assert.assertEquals(patentsAndTestCenterPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 patentsAndTestCenterPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
-        basePage.goToCorrosivesPage();
+        corrosivesPage = basePage.goToCorrosivesPage();
         Assert.assertEquals(corrosivesPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 corrosivesPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
-        basePage.goToProductPortfolioPage();
+        productPortfolioPage = basePage.goToProductPortfolioPage();
         Assert.assertEquals(productPortfolioPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 productPortfolioPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
-        basePage.goToBenefitsPage();
+        benefitsPage = basePage.goToBenefitsPage();
         Assert.assertEquals(benefitsPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 benefitsPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
-        basePage.goToTestPage();
+        testPage = basePage.goToTestPage();
         Assert.assertNotEquals(testPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 testPage.getBreadCrumbs()), "Bread crumbs contain different headers");
     }
@@ -94,7 +94,7 @@ public class TestTaskTests {
     public void howCanWeHelpTest() {
         basePage = new BasePage();
 
-        basePage.goToContentPage();
+        contentPage = basePage.goToContentPage();
         contentPage.scrollToSendMoreInformationForm();
         contentPage.fillFormWithRandomData();
         contentPage.submitForm();
@@ -107,7 +107,7 @@ public class TestTaskTests {
     public void locationSearchHasRightResult() {
         basePage = new BasePage();
 
-        basePage.goToDealerPage();
+        findDealerPage = basePage.goToDealerPage();
         String searchQuery = "truck";
         findDealerPage.enterSearchString(searchQuery);
 
@@ -121,7 +121,7 @@ public class TestTaskTests {
     public void differentQuantityInSearchResultWhenChangingRadius() {
         basePage = new BasePage();
 
-        basePage.goToDealerPage();
+        findDealerPage = basePage.goToDealerPage();
         int initialQuantity = findDealerPage.getSearchItemsQuantity();
 
         findDealerPage.setSliderToMaxPosition();
@@ -139,7 +139,7 @@ public class TestTaskTests {
     public void clearAllFiltersVerification() {
         basePage = new BasePage();
 
-        basePage.goToDealerPage();
+        findDealerPage = basePage.goToDealerPage();
         findDealerPage.fillFieldsWithRandomData();
         findDealerPage.checkAllCheckboxes();
         findDealerPage.setSliderToMaxPosition();

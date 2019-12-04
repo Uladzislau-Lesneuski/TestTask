@@ -26,7 +26,6 @@ public class WebDriverSingleton {
         if (driver.get() == null) {
             driver.set(factory.create());
         }
-
         return driver.get();
     }
 
