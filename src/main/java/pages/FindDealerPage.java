@@ -87,7 +87,7 @@ public class FindDealerPage extends BasePage {
         clearAllFilters.click();
     }
 
-    public boolean isAllCheckboxUnchecked() {
+    public boolean isEachCheckboxUnchecked() {
         Boolean flag = false;
         for (WebElement checkboxes: allCheckboxes) {
             if (!checkboxes.isSelected())
@@ -99,7 +99,7 @@ public class FindDealerPage extends BasePage {
         return flag;
     }
 
-    public boolean isSearchFieldsAreEmpty() {
+    public boolean isEachSearchFieldEmpty() {
         if ((companyNameField.getAttribute("value").isEmpty()) && (locationField.getAttribute("value").isEmpty()))
             return true;
         else

@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.BasePage;
-import pages.ContactPage;
+import pages.ContentPage;
 import pages.FindDealerPage;
 import webdriversingleton.WebDriverSingleton;
 
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class TestTaskTests {
     WebDriver driver;
     BasePage basePage;
-    ContactPage contactPage;
+    ContentPage contentPage;
     FindDealerPage findDealerPage;
 
     @BeforeMethod
@@ -23,9 +23,9 @@ public class TestTaskTests {
     public void start() {
         driver = WebDriverSingleton.create();
 
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
 
         driver.get("http://qa.yotec.net/");
         driver.manage().window().maximize();
@@ -36,11 +36,13 @@ public class TestTaskTests {
         WebDriverSingleton.kill();
     }
 
-    @Test (enabled = false)
-    public void navigateThroughMainMenuItems() {
+    @Test
+    public void navigateThroughSeveralMainMenuItems() {
         basePage = new BasePage();
 
-        basePage.navigateThroughRandomItemsFromEachSection();
+        basePage.goToOurLeadershipPage();
+
+        //basePage.navigateThroughRandomItemsFromEachSection();
 
         int d = 0;
 
@@ -57,17 +59,17 @@ public class TestTaskTests {
     @Test
     public void howCanWeHelpTest() {
         basePage = new BasePage();
-        contactPage = new ContactPage();
+        contentPage = new ContentPage();
 
-        basePage.goToContactPage();
-        contactPage.scrollToSendMoreInformationForm();
-        contactPage.fillFormWithRandomData();
-        contactPage.submitForm();
-        Assert.assertTrue(contactPage.isContactUsFormSendSuccessfully(), "Contact us page should sends successfully");
+        basePage.goToContentPage();
+        contentPage.scrollToSendMoreInformationForm();
+        contentPage.fillFormWithRandomData();
+        contentPage.submitForm();
+        Assert.assertTrue(contentPage.isContactUsFormSendSuccessfully(), "Contact us page should sends successfully");
     }
 
     @Test (groups = "location")
-    public void locationSearchTest() {
+    public void locationSearchRightResult() {
         basePage = new BasePage();
         findDealerPage = new FindDealerPage();
 
@@ -95,7 +97,7 @@ public class TestTaskTests {
     }
 
     @Test (groups = "location")
-    public void clearAllFilters() {
+    public void clearAllFiltersVerification() {
         basePage = new BasePage();
         findDealerPage = new FindDealerPage();
 
@@ -105,8 +107,8 @@ public class TestTaskTests {
         findDealerPage.setSliderToMaxPosition();
         findDealerPage.clearFilters();
 
-        Assert.assertTrue(findDealerPage.isAllCheckboxUnchecked(), "All checkboxes should be unchecked");
-        Assert.assertTrue(findDealerPage.isSearchFieldsAreEmpty(), "Search fields should be empty");
+        Assert.assertTrue(findDealerPage.isEachCheckboxUnchecked(), "All checkboxes should be unchecked");
+        Assert.assertTrue(findDealerPage.isEachSearchFieldEmpty(), "Search fields should be empty");
         Assert.assertFalse(findDealerPage.isSliderInDefaultPosition(), "Slider is not in default position");
     }
 

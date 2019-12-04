@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriversingleton.WebDriverSingleton;
 
@@ -22,35 +23,55 @@ public class BasePage {
     public BasePage() {
         PageFactory.initElements(driver, this);
     }
+
     WebDriverWait wait = new WebDriverWait(driver, 20);
 
     Actions builder = new Actions(driver);
 
-    @FindBy (css = "a[href='/we-are-wabash']")
-    WebElement weAreWabashLink;
+    @FindBy (css = "li.dropdown a[href='/we-are-wabash']")
+    WebElement weAreWabashSection;
 
-    @FindBy (css = "a[href='/tradition-of-innovation']")
-    WebElement traditionOfInnovationLink;
+    @FindBy (css = "li.dropdown a[href='/tradition-of-innovation']")
+    WebElement traditionOfInnovationSection;
 
-    @FindBy (css = "a[href='/our-products']")
-    WebElement ourProductsLink;
+    @FindBy (css = "li.dropdown a[href='/our-products']")
+    WebElement ourProductsSection;
 
-    @FindBy (css = "a[href='/our-brands']")
-    WebElement ourBrandsLink;
+    @FindBy (css = "li.dropdown a[href='/our-brands']")
+    WebElement ourBrandsSection;
 
-    @FindBy (css = "a[href='/work-with-wabash']")
-    WebElement workWithWabashLink;
+    @FindBy (css = "li.dropdown a[href='/work-with-wabash']")
+    WebElement workWithWabashSection;
 
-    @FindBy (css = "a[href='/timeline']")
-    WebElement timeLineLink;
+    @FindBy (css = "li a[href='/timeline']")
+    WebElement timeLineSection;
 
-    @FindBy (css = "a[href='/location-search']")
-    WebElement locationSearchLink;
+    @FindBy (css = "li.dropdown a[href='/location-search']")
+    WebElement locationSearchSection;
 
     @FindAll({
             @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]//li/a")
     })
     List<WebElement> allMenuLinks;
+
+    @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]//a[@href='/we-are-wabash/our-leadership']")
+    WebElement ourLeadershipLink;
+
+    @FindBy (css = "li.dropdown a[href='/we-are-wabash/corporate-responsibility/sustainability/fuel-economy']")
+    WebElement fuelEconomyLink;
+
+    @FindBy (css = "li.dropdown a[href='/tradition-of-innovation/patents-and-r-d-test-center']")
+    WebElement patentsAndTestCenterLink;
+
+    @FindBy (css = "li.dropdown a[href='/our-products/trailers/tank-trailers/stainless-steel/corrosives']")
+    WebElement corrosivesLink;
+
+    @FindBy (css = "li.dropdown a[href='/work-with-wabash/benefits']")
+    WebElement benefitsLink;
+
+    @FindBy (css = "li.dropdown a[href='/location-search/test']")
+    WebElement testLink;
+
 
     @FindAll({
             @FindBy (css = "ul[id*='childNodesContainer'] a")
@@ -159,12 +180,16 @@ public class BasePage {
         System.out.println();
     }
 
-    public void goToContactPage() {
-        contactPageLink.click();
+    public void goToContentPage() {
+        weAreWabashSection.click();
     }
 
     public void goToDealerPage() {
-            builder.moveToElement(locationSearchLink).click(dealerLink).perform();
+            builder.moveToElement(locationSearchSection).click(dealerLink).perform();
         }
 
+    public void goToOurLeadershipPage() {
+        wait.until(ExpectedConditions.visibilityOf(weAreWabashSection));
+        builder.moveToElement(weAreWabashSection).click(ourLeadershipLink).perform();
+    }
 }
