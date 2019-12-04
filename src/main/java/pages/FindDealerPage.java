@@ -88,7 +88,7 @@ public class FindDealerPage extends BasePage {
     }
 
     public boolean isEachCheckboxUnchecked() {
-        Boolean flag = false;
+        boolean flag = false;
         for (WebElement checkboxes: allCheckboxes) {
             if (!checkboxes.isSelected())
                 flag = true;

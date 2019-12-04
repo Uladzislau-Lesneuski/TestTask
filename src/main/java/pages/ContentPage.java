@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -44,6 +45,11 @@ public class ContentPage extends BasePage {
 
     @FindBy (id = "ContentPlaceHolderFooter_TADBF704B033_ctl00_ctl00_successMessage")
     WebElement successMessage;
+
+    @FindAll({
+            @FindBy (xpath = "//li[@class='rsmItem sfBreadcrumbNavigation']/a")
+    })
+    List<WebElement> breadCrumbs;
 
     public void scrollToSendMoreInformationForm() {
         wait.until(ExpectedConditions.visibilityOf(titleOfForm));

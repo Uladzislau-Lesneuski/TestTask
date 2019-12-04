@@ -40,6 +40,12 @@ public class BasePage {
     @FindBy (css = "li.dropdown a[href='/our-brands']")
     WebElement ourBrandsSection;
 
+    @FindBy (css = "li.dropdown a[href='/our-brands/benson']")
+    WebElement bensonLink;
+
+    @FindBy (css = "li.dropdown a[href='/our-brands/benson/product-portfolio']")
+    WebElement productPortfolioLink;
+
     @FindBy (css = "li.dropdown a[href='/work-with-wabash']")
     WebElement workWithWabashSection;
 
@@ -57,11 +63,17 @@ public class BasePage {
     @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]//a[@href='/we-are-wabash/our-leadership']")
     WebElement ourLeadershipLink;
 
+    @FindBy (xpath = "//ul[contains(@class, 'CustomMenu')]//a[@href='/we-are-wabash/corporate-responsibility']")
+    WebElement corporateResponsibilityLink;
+
     @FindBy (css = "li.dropdown a[href='/we-are-wabash/corporate-responsibility/sustainability/fuel-economy']")
     WebElement fuelEconomyLink;
 
     @FindBy (css = "li.dropdown a[href='/tradition-of-innovation/patents-and-r-d-test-center']")
     WebElement patentsAndTestCenterLink;
+
+    @FindBy (css = "li.dropdown a[href='/our-products/trailers/tank-trailers']")
+    WebElement tankTrailersLink;
 
     @FindBy (css = "li.dropdown a[href='/our-products/trailers/tank-trailers/stainless-steel/corrosives']")
     WebElement corrosivesLink;
@@ -72,18 +84,19 @@ public class BasePage {
     @FindBy (css = "li.dropdown a[href='/location-search/test']")
     WebElement testLink;
 
-
     @FindAll({
             @FindBy (css = "ul[id*='childNodesContainer'] a")
             //@FindBy (xpath = "//ul[contains(@id, 'childNodesContainer')]//li")
     })
     List<WebElement> dropDownItems;
 
-    @FindBy (css = "a[href='/small-menu/contact']")
-    WebElement contactPageLink;
-
     @FindBy (css = "a[href='/location-search/dealer']")
     WebElement dealerLink;
+
+    @FindAll({
+            @FindBy(xpath = "//li[@class='rsmItem sfBreadcrumbNavigation']/a")
+    })
+    List<WebElement> breadCrumbs;
 
     public static String generateRandomString(int length) {
         Random random = new Random();
@@ -114,7 +127,7 @@ public class BasePage {
 
 
     public boolean checkLinksResponse(List<String> links) {
-        Boolean flag = false;
+        boolean flag = false;
         HttpURLConnection httpURLConnection;
         int responseCode;
 
@@ -185,11 +198,54 @@ public class BasePage {
     }
 
     public void goToDealerPage() {
-            builder.moveToElement(locationSearchSection).click(dealerLink).perform();
-        }
+        builder.moveToElement(locationSearchSection).click(dealerLink).perform();
+    }
 
     public void goToOurLeadershipPage() {
         wait.until(ExpectedConditions.visibilityOf(weAreWabashSection));
         builder.moveToElement(weAreWabashSection).click(ourLeadershipLink).perform();
+    }
+
+    public void goToFuelEconomyPage() {
+        wait.until(ExpectedConditions.visibilityOf(weAreWabashSection));
+        builder.moveToElement(weAreWabashSection).moveToElement(corporateResponsibilityLink).click(fuelEconomyLink).perform();
+    }
+
+    public void goToPatentsAndTestCenterPage() {
+        wait.until(ExpectedConditions.visibilityOf(traditionOfInnovationSection));
+        builder.moveToElement(traditionOfInnovationSection).click(patentsAndTestCenterLink).perform();
+    }
+
+    public void goToCorrosivesPage() {
+        wait.until(ExpectedConditions.visibilityOf(ourProductsSection));
+        builder.moveToElement(ourProductsSection).moveToElement(tankTrailersLink).click(corrosivesLink).perform();
+    }
+
+    public void goToBenefitsPage() {
+        wait.until(ExpectedConditions.visibilityOf(workWithWabashSection));
+        builder.moveToElement(workWithWabashSection).click(benefitsLink).perform();
+    }
+
+    public void goToTestPage() {
+        wait.until(ExpectedConditions.visibilityOf(locationSearchSection));
+        builder.moveToElement(locationSearchSection).click(testLink).perform();
+    }
+
+    public void goToProductPortfolioPage() {
+        wait.until(ExpectedConditions.visibilityOf(ourBrandsSection));
+        builder.moveToElement(ourBrandsSection).moveToElement(bensonLink).click(productPortfolioLink).perform();
+    }
+
+    public List<String> checkBreadcrumbsOrder(List<WebElement> breadcrumbs) {
+
+        List<String> textFromBreadcrumbs = new ArrayList<>();
+
+        for (WebElement text: breadcrumbs) {
+            textFromBreadcrumbs.add(text.getText());
+        }
+
+        System.out.println(textFromBreadcrumbs);
+
+        return textFromBreadcrumbs;
     }
 }

@@ -9,25 +9,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class OurLeadershipPage extends BasePage{
+public class BenefitsPage extends BasePage {
 
-    public OurLeadershipPage() {
+    public BenefitsPage() {
         PageFactory.initElements(driver, this);
     }
 
     @FindAll({
-            @FindBy (xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
     })
     List<WebElement> breadCrumbs;
 
-    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "We Are Wabash", "Our Leadership"));
-
-    public List<String> getExpectedOrder() {
-        return expectedBreadcrumbsHeaders;
-    }
+    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Work With Wabash", "Benefits"));
 
     public List<WebElement> getBreadCrumbs() {
         return breadCrumbs;
     }
 
+    public List<String> getExpectedOrder() {
+        return expectedBreadcrumbsHeaders;
+    }
 }

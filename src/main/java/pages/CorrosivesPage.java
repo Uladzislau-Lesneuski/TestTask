@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class OurLeadershipPage extends BasePage{
+public class CorrosivesPage extends BasePage {
 
-    public OurLeadershipPage() {
+    public CorrosivesPage() {
         PageFactory.initElements(driver, this);
     }
 
     @FindAll({
-            @FindBy (xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
     })
     List<WebElement> breadCrumbs;
 
-    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "We Are Wabash", "Our Leadership"));
+    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Our Products", "Trailers", "Tank Trailers", "Stainless Steel", "Corrosives"));
 
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;
@@ -29,5 +29,4 @@ public class OurLeadershipPage extends BasePage{
     public List<WebElement> getBreadCrumbs() {
         return breadCrumbs;
     }
-
 }

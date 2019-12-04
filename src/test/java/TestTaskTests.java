@@ -4,9 +4,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.BasePage;
-import pages.ContentPage;
-import pages.FindDealerPage;
+import pages.*;
 import webdriversingleton.WebDriverSingleton;
 
 import java.util.List;
@@ -17,6 +15,14 @@ public class TestTaskTests {
     BasePage basePage;
     ContentPage contentPage;
     FindDealerPage findDealerPage;
+    OurLeadershipPage leadershipPage;
+    FuelEconomyPage fuelEconomyPage;
+    PatentsAndTestCenterPage patentsAndTestCenterPage;
+    ProductPortfolioPage productPortfolioPage;
+    TestPage testPage;
+    CorrosivesPage corrosivesPage;
+    BenefitsPage benefitsPage;
+
 
     @BeforeMethod
     @Parameters({"browserName", "isHeadless"})
@@ -39,12 +45,47 @@ public class TestTaskTests {
     @Test
     public void navigateThroughSeveralMainMenuItems() {
         basePage = new BasePage();
+        leadershipPage= new OurLeadershipPage();
+        fuelEconomyPage= new FuelEconomyPage();
+        patentsAndTestCenterPage = new PatentsAndTestCenterPage();
+        productPortfolioPage = new ProductPortfolioPage();
+        testPage = new TestPage();
+        corrosivesPage = new CorrosivesPage();
+        benefitsPage = new BenefitsPage();
 
         basePage.goToOurLeadershipPage();
+        Assert.assertEquals(leadershipPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                leadershipPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
+        driver.navigate().back();
 
-        //basePage.navigateThroughRandomItemsFromEachSection();
+        basePage.goToFuelEconomyPage();
+        Assert.assertEquals(fuelEconomyPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                fuelEconomyPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
+        driver.navigate().back();
 
-        int d = 0;
+        basePage.goToPatentsAndTestCenterPage();
+        Assert.assertEquals(patentsAndTestCenterPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                patentsAndTestCenterPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
+        driver.navigate().back();
+
+        basePage.goToCorrosivesPage();
+        Assert.assertEquals(corrosivesPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                corrosivesPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
+        driver.navigate().back();
+
+        basePage.goToProductPortfolioPage();
+        Assert.assertEquals(productPortfolioPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                productPortfolioPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
+        driver.navigate().back();
+
+        basePage.goToBenefitsPage();
+        Assert.assertEquals(benefitsPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                benefitsPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
+        driver.navigate().back();
+
+        basePage.goToTestPage();
+        Assert.assertNotEquals(testPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+                testPage.getBreadCrumbs()), "Bread crumbs contain different headers");
 
     }
 
