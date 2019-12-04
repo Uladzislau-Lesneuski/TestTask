@@ -1,8 +1,5 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
@@ -15,16 +12,7 @@ public class BenefitsPage extends ContentPage {
         PageFactory.initElements(driver, this);
     }
 
-//    @FindAll({
-//            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
-//    })
-//    List<WebElement> breadCrumbs;
-
     List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Work With Wabash", "Benefits"));
-
-//    public List<WebElement> getBreadCrumbs() {
-//        return breadCrumbs;
-//    }
 
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;

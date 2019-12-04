@@ -1,8 +1,5 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
@@ -15,11 +12,6 @@ public class FuelEconomyPage extends ContentPage {
         PageFactory.initElements(driver, this);
     }
 
-//    @FindAll({
-//            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
-//    })
-//    List<WebElement> breadCrumbs;
-
     List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "We Are Wabash",
             "Corporate Responsibility", "Sustainability", "Fuel Economy"));
 
@@ -27,7 +19,4 @@ public class FuelEconomyPage extends ContentPage {
         return expectedBreadcrumbsHeaders;
     }
 
-//    public List<WebElement> getBreadCrumbs() {
-//        return breadCrumbs;
-//    }
 }
