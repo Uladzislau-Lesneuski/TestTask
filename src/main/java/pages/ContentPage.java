@@ -62,7 +62,7 @@ public class ContentPage extends BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", titleOfForm);
     }
 
-    public void fillFormWithRandomData() {
+    public ContentPage fillFormWithRandomData() {
         Select choice, country;
         int choiceIndex, countryIndex;
         List<WebElement> choiceSize, countrySize;
@@ -83,6 +83,8 @@ public class ContentPage extends BasePage {
         emailField.sendKeys(generateRandomString(7));
         phoneField.sendKeys(generateRandomString(7));
         commentsField.sendKeys(generateRandomString(25));
+
+        return new ContentPage();
     }
 
     public void submitForm() {
@@ -93,7 +95,7 @@ public class ContentPage extends BasePage {
         return successMessage.getText().contains("Success! Thanks for filling out our form!");
     }
 
-    public List<String> checkBreadcrumbsOrder(List<WebElement> breadcrumbs) {
+    public List<String> getBreadcrumbsOrder(List<WebElement> breadcrumbs) {
         List<String> textFromBreadcrumbs = new ArrayList<>();
 
         for (WebElement text: breadcrumbs) {
