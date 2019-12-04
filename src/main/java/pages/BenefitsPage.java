@@ -16,7 +16,7 @@ public class BenefitsPage extends BasePage {
     }
 
     @FindAll({
-            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
     })
     List<WebElement> breadCrumbs;
 

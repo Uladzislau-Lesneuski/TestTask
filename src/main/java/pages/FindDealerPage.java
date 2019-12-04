@@ -13,26 +13,26 @@ public class FindDealerPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy (id = "CompanyName")
-    WebElement companyNameField;
+    @FindBy (id = "//input[@placeholder='Search Term']")
+    WebElement searchTerm;
 
-    @FindBy (id = "ContentPlaceHolderContent_C001_txtSourceZip")
+    @FindBy (id = "//input[contains(@placeholder, 'State')]")
     WebElement locationField;
 
     @FindBy (xpath = "//h2/a")
     WebElement foundItems;
 
-    @FindBy (id = "ContentPlaceHolderContent_C001_lblDealerCount")
+    @FindBy (xpath = "//span[contains(@id, 'DealerCount')]")
     WebElement quantityOfSearchItems;
 
-    @FindBy (xpath = "//div[@class='noUi-handle noUi-handle-lower']")
+    @FindBy (xpath = "//div[@class='range-slider']//div[contains(@class, 'handle')]")
     WebElement slider;
 
-    @FindBy (xpath = "//div[@class='noUi-base']")
+    @FindBy (xpath = "//div[contains(@class, 'range')]/div[contains(@class, 'base')]")
     WebElement sliderRadius;
 
     @FindAll({
-            @FindBy (xpath = "//span[@class='rbIcon p-icon p-i-checkbox rbToggleCheckbox']")
+            @FindBy (xpath = "//span[contains(@class, 'ToggleCheckbox')]")
     })
     List <WebElement> allCheckboxes;
 
@@ -49,8 +49,8 @@ public class FindDealerPage extends BasePage {
     }
 
     public void searchItem(String searchItem) {
-        wait.until(ExpectedConditions.visibilityOf(companyNameField));
-        companyNameField.sendKeys(searchItem);
+        wait.until(ExpectedConditions.visibilityOf(searchTerm));
+        searchTerm.sendKeys(searchItem);
     }
 
     public int getSearchItemsQuantity() {
@@ -62,27 +62,23 @@ public class FindDealerPage extends BasePage {
         builder.moveToElement(slider).clickAndHold()
                 .moveByOffset((sliderRadius.getSize().getWidth()), 0)
                 .release().perform();
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        wait.until(ExpectedConditions.invisibilityOf(quantityOfSearchItems));
+        wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
     }
 
     public void setSliderToDefaultPosition() {
         builder.moveToElement(slider).clickAndHold()
-                .moveByOffset(-(sliderRadius.getSize().getWidth() / 2), 0)
+                .moveByOffset( - (sliderRadius.getSize().getWidth() / 2), 0)
                 .release().perform();
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        wait.until(ExpectedConditions.invisibilityOf(quantityOfSearchItems));
+        wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
     }
 
 
     public void fillFieldsWithRandomData() {
-        companyNameField.sendKeys(generateRandomString(10));
+        searchTerm.sendKeys(generateRandomString(10));
         locationField.sendKeys(generateRandomString(10));
     }
 
@@ -109,7 +105,7 @@ public class FindDealerPage extends BasePage {
     }
 
     public boolean isEachSearchFieldEmpty() {
-        if ((companyNameField.getAttribute("value").isEmpty()) && (locationField.getAttribute("value").isEmpty()))
+        if ((searchTerm.getAttribute("value").isEmpty()) && (locationField.getAttribute("value").isEmpty()))
             return true;
         else
             return false;

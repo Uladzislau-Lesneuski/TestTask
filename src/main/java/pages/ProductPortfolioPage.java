@@ -16,11 +16,12 @@ public class ProductPortfolioPage extends BasePage {
     }
 
     @FindAll({
-            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
     })
     List<WebElement> breadCrumbs;
 
-    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Our Brands", "Benson", "Product Portfolio"));
+    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Our Brands", "Benson",
+            "Product Portfolio"));
 
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;

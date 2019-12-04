@@ -16,34 +16,34 @@ public class ContentPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy (xpath = "//input[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$C006$ctl00$ctl00$textBox_write']")
+    @FindBy (xpath = "//input[@placeholder='Name']")
     WebElement nameField;
 
-    @FindBy (xpath = "//input[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$C008$ctl00$ctl00$textBox_write']")
+    @FindBy (xpath = "//input[@placeholder='Company']")
     WebElement companyField;
 
-    @FindBy (xpath = "//input[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$C010$ctl00$ctl00$textBox_write']")
+    @FindBy (xpath = "//input[@placeholder='Email']")
     WebElement emailField;
 
-    @FindBy (xpath = "//input[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$C011$ctl00$ctl00$textBox_write']")
+    @FindBy (xpath = "//input[@placeholder='Phone']")
     WebElement phoneField;
 
-    @FindBy (xpath = "//textarea[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$ctl09$C009$ctl00$ctl00$textBox_write']")
+    @FindBy (xpath = "//textarea[@placeholder='Comments']")
     WebElement commentsField;
 
     @FindBy (xpath = "//h2[text()='How can we help?']")
     WebElement titleOfForm;
 
-    @FindBy (xpath = "//select[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$ctl02$C015$ctl00$ctl00$dropDown']")
-    WebElement choiceDropDownn;
+    @FindBy (xpath = "//span/select[contains(@name,'dropDown')]")
+    WebElement choiceDropDown;
 
-    @FindBy (xpath = "//select[@name='ctl00$ContentPlaceHolderFooter$TADBF704B033$ctl00$ctl00$ctl02$C019$ctl00$ctl00$dropDownCountry']")
+    @FindBy (xpath = "//select[contains(@name, 'dropDownCountry')]")
     WebElement countryDropdown;
 
     @FindBy (xpath = "//input[@value='Submit']")
     WebElement submitButton;
 
-    @FindBy (id = "ContentPlaceHolderFooter_TADBF704B033_ctl00_ctl00_successMessage")
+    @FindBy (xpath = "//div[contains(@id, 'successMessage')]")
     WebElement successMessage;
 
     public void scrollToSendMoreInformationForm() {
@@ -57,7 +57,7 @@ public class ContentPage extends BasePage {
         List<WebElement> choiceSize, countrySize;
         Random random = new Random();
 
-        choice = new Select(choiceDropDownn);
+        choice = new Select(choiceDropDown);
         choiceSize = choice.getOptions();
         choiceIndex = random.nextInt(choiceSize.size());
         choice.selectByIndex(choiceIndex);

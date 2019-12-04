@@ -29,12 +29,12 @@ public class TestTaskTests {
     public void start() {
         driver = WebDriverSingleton.create();
 
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
 
-        driver.get("http://qa.yotec.net/");
         driver.manage().window().maximize();
+        driver.get("http://qa.yotec.net/");
     }
 
     @AfterMethod
@@ -106,18 +106,20 @@ public class TestTaskTests {
         contentPage.scrollToSendMoreInformationForm();
         contentPage.fillFormWithRandomData();
         contentPage.submitForm();
-        Assert.assertTrue(contentPage.isContactUsFormSendSuccessfully(), "Contact us page should sends successfully");
+        Assert.assertTrue(contentPage.isContactUsFormSendSuccessfully(),
+                "Contact us page should sends successfully");
     }
 
     @Test (groups = "location")
-    public void locationSearchRightResult() {
+    public void locationSearchHasRightResult() {
         basePage = new BasePage();
         findDealerPage = new FindDealerPage();
 
         basePage.goToDealerPage();
         String searchQuery = "truck";
         findDealerPage.searchItem(searchQuery);
-        Assert.assertTrue(findDealerPage.isResultsContainEnteredString(searchQuery), "Result of search should be correct");
+        Assert.assertTrue(findDealerPage.isResultsContainEnteredString(searchQuery),
+                "Result of search should be correct");
 
     }
 

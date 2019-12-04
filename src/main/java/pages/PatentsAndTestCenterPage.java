@@ -16,11 +16,12 @@ public class PatentsAndTestCenterPage extends BasePage {
     }
 
     @FindAll({
-            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
     })
     List<WebElement> breadCrumbs;
 
-    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Tradition of Innovation", "Patents and R&D Test Center"));
+    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Tradition of Innovation",
+            "Patents and R&D Test Center"));
 
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;

@@ -16,11 +16,12 @@ public class FuelEconomyPage extends BasePage {
     }
 
     @FindAll({
-            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
     })
     List<WebElement> breadCrumbs;
 
-    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "We Are Wabash", "Corporate Responsibility", "Sustainability", "Fuel Economy"));
+    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "We Are Wabash",
+            "Corporate Responsibility", "Sustainability", "Fuel Economy"));
 
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;

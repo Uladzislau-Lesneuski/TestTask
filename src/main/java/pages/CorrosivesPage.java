@@ -16,11 +16,12 @@ public class CorrosivesPage extends BasePage {
     }
 
     @FindAll({
-            @FindBy(xpath = "//ul[@class='rsmFlow rsmLevel rsmOneLevel']//a")
+            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
     })
     List<WebElement> breadCrumbs;
 
-    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Our Products", "Trailers", "Tank Trailers", "Stainless Steel", "Corrosives"));
+    List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Our Products", "Trailers",
+            "Tank Trailers", "Stainless Steel", "Corrosives"));
 
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;
