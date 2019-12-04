@@ -110,7 +110,6 @@ public class BasePage {
         return links;
     }
 
-
     public boolean checkLinksResponse(List<String> links) {
         boolean flag = false;
         HttpURLConnection httpURLConnection;
@@ -141,46 +140,64 @@ public class BasePage {
         return flag;
     }
 
-    public void goToContentPage() {
+    public ContentPage goToContentPage() {
         weAreWabashSection.click();
+
+        return new ContentPage();
     }
 
-    public void goToDealerPage() {
+    public FindDealerPage goToDealerPage() {
         builder.moveToElement(locationSearchSection).click(dealerLink).perform();
+
+        return new FindDealerPage();
     }
 
-    public void goToOurLeadershipPage() {
+    public OurLeadershipPage goToOurLeadershipPage() {
         wait.until(ExpectedConditions.visibilityOf(weAreWabashSection));
         builder.moveToElement(weAreWabashSection).click(ourLeadershipLink).perform();
+
+        return new OurLeadershipPage();
     }
 
-    public void goToFuelEconomyPage() {
+    public FuelEconomyPage goToFuelEconomyPage() {
         wait.until(ExpectedConditions.visibilityOf(weAreWabashSection));
         builder.moveToElement(weAreWabashSection).moveToElement(corporateResponsibilityLink).click(fuelEconomyLink).perform();
+
+        return new FuelEconomyPage();
     }
 
-    public void goToPatentsAndTestCenterPage() {
+    public PatentsAndTestCenterPage goToPatentsAndTestCenterPage() {
         wait.until(ExpectedConditions.visibilityOf(traditionOfInnovationSection));
         builder.moveToElement(traditionOfInnovationSection).click(patentsAndTestCenterLink).perform();
+
+        return new PatentsAndTestCenterPage();
     }
 
-    public void goToCorrosivesPage() {
+    public CorrosivesPage goToCorrosivesPage() {
         wait.until(ExpectedConditions.visibilityOf(ourProductsSection));
         builder.moveToElement(ourProductsSection).moveToElement(tankTrailersLink).click(corrosivesLink).perform();
+
+        return new CorrosivesPage();
     }
 
-    public void goToBenefitsPage() {
+    public BenefitsPage goToBenefitsPage() {
         wait.until(ExpectedConditions.visibilityOf(workWithWabashSection));
         builder.moveToElement(workWithWabashSection).click(benefitsLink).perform();
+
+        return new BenefitsPage();
     }
 
-    public void goToTestPage() {
+    public TestPage goToTestPage() {
         wait.until(ExpectedConditions.visibilityOf(locationSearchSection));
         builder.moveToElement(locationSearchSection).click(testLink).perform();
+
+        return new TestPage();
     }
 
-    public void goToProductPortfolioPage() {
+    public ProductPortfolioPage goToProductPortfolioPage() {
         wait.until(ExpectedConditions.visibilityOf(ourBrandsSection));
         builder.moveToElement(ourBrandsSection).moveToElement(bensonLink).click(productPortfolioLink).perform();
+
+        return new ProductPortfolioPage();
     }
 }

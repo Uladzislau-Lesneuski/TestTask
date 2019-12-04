@@ -45,46 +45,39 @@ public class TestTaskTests {
     public void navigateThroughSeveralMainMenuItems() {
         basePage = new BasePage();
         contentPage = new ContentPage();
-        leadershipPage= new OurLeadershipPage();
-        fuelEconomyPage= new FuelEconomyPage();
-        patentsAndTestCenterPage = new PatentsAndTestCenterPage();
-        productPortfolioPage = new ProductPortfolioPage();
-        testPage = new TestPage();
-        corrosivesPage = new CorrosivesPage();
-        benefitsPage = new BenefitsPage();
 
         basePage.goToOurLeadershipPage();
-        Assert.assertEquals(leadershipPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertEquals(leadershipPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 leadershipPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToFuelEconomyPage();
-        Assert.assertEquals(fuelEconomyPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertEquals(fuelEconomyPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 fuelEconomyPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToPatentsAndTestCenterPage();
-        Assert.assertEquals(patentsAndTestCenterPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertEquals(patentsAndTestCenterPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 patentsAndTestCenterPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToCorrosivesPage();
-        Assert.assertEquals(corrosivesPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertEquals(corrosivesPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 corrosivesPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToProductPortfolioPage();
-        Assert.assertEquals(productPortfolioPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertEquals(productPortfolioPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 productPortfolioPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToBenefitsPage();
-        Assert.assertEquals(benefitsPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertEquals(benefitsPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 benefitsPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToTestPage();
-        Assert.assertNotEquals(testPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
+        Assert.assertNotEquals(testPage.getExpectedOrder(), contentPage.getBreadcrumbsOrder(
                 testPage.getBreadCrumbs()), "Bread crumbs contain different headers");
     }
 
@@ -100,7 +93,6 @@ public class TestTaskTests {
     @Test
     public void howCanWeHelpTest() {
         basePage = new BasePage();
-        contentPage = new ContentPage();
 
         basePage.goToContentPage();
         contentPage.scrollToSendMoreInformationForm();
@@ -114,7 +106,6 @@ public class TestTaskTests {
     @Test (groups = "location")
     public void locationSearchHasRightResult() {
         basePage = new BasePage();
-        findDealerPage = new FindDealerPage();
 
         basePage.goToDealerPage();
         String searchQuery = "truck";
@@ -129,7 +120,6 @@ public class TestTaskTests {
     @Test (groups = "location")
     public void differentQuantityInSearchResultWhenChangingRadius() {
         basePage = new BasePage();
-        findDealerPage = new FindDealerPage();
 
         basePage.goToDealerPage();
         int initialQuantity = findDealerPage.getSearchItemsQuantity();
@@ -148,7 +138,6 @@ public class TestTaskTests {
     @Test (groups = "location")
     public void clearAllFiltersVerification() {
         basePage = new BasePage();
-        findDealerPage = new FindDealerPage();
 
         basePage.goToDealerPage();
         findDealerPage.fillFieldsWithRandomData();
