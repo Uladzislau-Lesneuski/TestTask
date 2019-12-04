@@ -76,7 +76,6 @@ public class FindDealerPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
     }
 
-
     public void fillFieldsWithRandomData() {
         searchTerm.sendKeys(generateRandomString(10));
         locationField.sendKeys(generateRandomString(10));

@@ -92,13 +92,13 @@ public class BasePage {
         String finalString = lower + upper + number;
         if (length < 1) throw new IllegalArgumentException();
 
-        StringBuilder sb = new StringBuilder(length);
+        StringBuilder stringBuilder = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             int rndCharAt = random.nextInt(finalString.length());
             char rndChar = finalString.charAt(rndCharAt);
-            sb.append(rndChar);
+            stringBuilder.append(rndChar);
         }
-        return sb.toString();
+        return stringBuilder.toString();
     }
 
     public List<String> collectAllLinks(){
@@ -107,7 +107,6 @@ public class BasePage {
             builder.moveToElement(items).perform();
             links.add(items.getAttribute("href"));
         }
-
         return links;
     }
 
@@ -184,5 +183,4 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(ourBrandsSection));
         builder.moveToElement(ourBrandsSection).moveToElement(bensonLink).click(productPortfolioLink).perform();
     }
-
 }

@@ -18,5 +18,4 @@ public class PatentsAndTestCenterPage extends ContentPage {
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;
     }
-
 }

@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

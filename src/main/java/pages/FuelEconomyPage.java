@@ -18,5 +18,4 @@ public class FuelEconomyPage extends ContentPage {
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;
     }
-
 }

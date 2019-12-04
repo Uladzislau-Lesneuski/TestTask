@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ContentPage extends BasePage {
+
     public ContentPage() {
         PageFactory.initElements(driver, this);
     }
@@ -82,7 +83,6 @@ public class ContentPage extends BasePage {
         emailField.sendKeys(generateRandomString(7));
         phoneField.sendKeys(generateRandomString(7));
         commentsField.sendKeys(generateRandomString(25));
-
     }
 
     public void submitForm() {
@@ -94,7 +94,6 @@ public class ContentPage extends BasePage {
     }
 
     public List<String> checkBreadcrumbsOrder(List<WebElement> breadcrumbs) {
-
         List<String> textFromBreadcrumbs = new ArrayList<>();
 
         for (WebElement text: breadcrumbs) {

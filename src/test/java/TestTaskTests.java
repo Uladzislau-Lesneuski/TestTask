@@ -23,7 +23,6 @@ public class TestTaskTests {
     CorrosivesPage corrosivesPage;
     BenefitsPage benefitsPage;
 
-
     @BeforeMethod
     @Parameters({"browserName", "isHeadless"})
     public void start() {
@@ -87,7 +86,6 @@ public class TestTaskTests {
         basePage.goToTestPage();
         Assert.assertNotEquals(testPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 testPage.getBreadCrumbs()), "Bread crumbs contain different headers");
-
     }
 
     @Test
@@ -126,8 +124,6 @@ public class TestTaskTests {
                 "Result of search should be correct");
         Assert.assertTrue(findDealerPage.isSearchWithRandomDataGetEmptyResult(),
                 "Search with random data should return empty result");
-
-
     }
 
     @Test (groups = "location")
@@ -164,5 +160,4 @@ public class TestTaskTests {
         Assert.assertTrue(findDealerPage.isEachSearchFieldEmpty(), "Search fields should be empty");
         Assert.assertFalse(findDealerPage.isSliderInDefaultPosition(), "Slider is not in default position");
     }
-
 }

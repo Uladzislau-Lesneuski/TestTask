@@ -18,5 +18,4 @@ public class ProductPortfolioPage extends ContentPage {
     public List<String> getExpectedOrder() {
         return expectedBreadcrumbsHeaders;
     }
-
 }
