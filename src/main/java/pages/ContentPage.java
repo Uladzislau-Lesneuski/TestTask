@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +47,15 @@ public class ContentPage extends BasePage {
     @FindBy (xpath = "//div[contains(@id, 'successMessage')]")
     WebElement successMessage;
 
+    @FindAll({
+            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
+    })
+    List<WebElement> breadCrumbs;
+
+    public List<WebElement> getBreadCrumbs() {
+        return breadCrumbs;
+    }
+
     public void scrollToSendMoreInformationForm() {
         wait.until(ExpectedConditions.visibilityOf(titleOfForm));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", titleOfForm);
@@ -81,6 +91,19 @@ public class ContentPage extends BasePage {
 
     public boolean isContactUsFormSendSuccessfully() {
         return successMessage.getText().contains("Success! Thanks for filling out our form!");
+    }
+
+    public List<String> checkBreadcrumbsOrder(List<WebElement> breadcrumbs) {
+
+        List<String> textFromBreadcrumbs = new ArrayList<>();
+
+        for (WebElement text: breadcrumbs) {
+            textFromBreadcrumbs.add(text.getText());
+        }
+
+        System.out.println(textFromBreadcrumbs);
+
+        return textFromBreadcrumbs;
     }
 }
 

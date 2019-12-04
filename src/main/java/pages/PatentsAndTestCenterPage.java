@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PatentsAndTestCenterPage extends BasePage {
+public class PatentsAndTestCenterPage extends ContentPage {
 
     public PatentsAndTestCenterPage() {
         PageFactory.initElements(driver, this);
     }
 
-    @FindAll({
-            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
-    })
-    List<WebElement> breadCrumbs;
+//    @FindAll({
+//            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
+//    })
+//    List<WebElement> breadCrumbs;
 
     List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Tradition of Innovation",
             "Patents and R&D Test Center"));
@@ -27,7 +27,7 @@ public class PatentsAndTestCenterPage extends BasePage {
         return expectedBreadcrumbsHeaders;
     }
 
-    public List<WebElement> getBreadCrumbs() {
-        return breadCrumbs;
-    }
+//    public List<WebElement> getBreadCrumbs() {
+//        return breadCrumbs;
+//    }
 }

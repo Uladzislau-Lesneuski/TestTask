@@ -13,10 +13,10 @@ public class FindDealerPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy (id = "//input[@placeholder='Search Term']")
+    @FindBy (xpath = "//input[@placeholder='Search Term']")
     WebElement searchTerm;
 
-    @FindBy (id = "//input[contains(@placeholder, 'State')]")
+    @FindBy (xpath = "//input[contains(@placeholder, 'State')]")
     WebElement locationField;
 
     @FindBy (xpath = "//h2/a")
@@ -45,12 +45,12 @@ public class FindDealerPage extends BasePage {
     public boolean isResultsContainEnteredString(String searchQuery) {
         wait.until(ExpectedConditions.visibilityOf(foundItems));
         System.out.println(foundItems.getText());
-        return foundItems.getText().contains(searchQuery);
+        return foundItems.getText().toLowerCase().contains(searchQuery);
     }
 
-    public void searchItem(String searchItem) {
+    public void enterSearchString(String searchString) {
         wait.until(ExpectedConditions.visibilityOf(searchTerm));
-        searchTerm.sendKeys(searchItem);
+        searchTerm.sendKeys(searchString);
     }
 
     public int getSearchItemsQuantity() {
@@ -115,4 +115,15 @@ public class FindDealerPage extends BasePage {
         return (Integer.parseInt(sliderValue.getText().split(" ")[0]) == 500);
     }
 
+    public boolean isSearchWithRandomDataGetEmptyResult() {
+        clearAllFilters.click();
+        searchTerm.sendKeys(generateRandomString(10));
+        wait.until(ExpectedConditions.invisibilityOf(quantityOfSearchItems));
+        wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
+
+        if (Integer.parseInt(quantityOfSearchItems.getText().split(" ")[0]) == 0)
+            return true;
+        else
+            return false;
+    }
 }

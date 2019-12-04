@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestPage extends BasePage {
+public class TestPage extends ContentPage {
 
     public TestPage() {
         PageFactory.initElements(driver, this);
     }
 
-    @FindAll({
-            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
-    })
-    List<WebElement> breadCrumbs;
+//    @FindAll({
+//            @FindBy(xpath = "//div[contains(@id, 'Breadcrumb')]//a")
+//    })
+//    List<WebElement> breadCrumbs;
 
     List<String> expectedBreadcrumbsHeaders = new ArrayList<>(Arrays.asList("Home", "Location Search", "Test"));
 
@@ -26,7 +26,7 @@ public class TestPage extends BasePage {
         return expectedBreadcrumbsHeaders;
     }
 
-    public List<WebElement> getBreadCrumbs() {
-        return breadCrumbs;
-    }
+//    public List<WebElement> getBreadCrumbs() {
+//        return breadCrumbs;
+//    }
 }

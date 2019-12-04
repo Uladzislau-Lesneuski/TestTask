@@ -185,16 +185,4 @@ public class BasePage {
         builder.moveToElement(ourBrandsSection).moveToElement(bensonLink).click(productPortfolioLink).perform();
     }
 
-    public List<String> checkBreadcrumbsOrder(List<WebElement> breadcrumbs) {
-
-        List<String> textFromBreadcrumbs = new ArrayList<>();
-
-        for (WebElement text: breadcrumbs) {
-            textFromBreadcrumbs.add(text.getText());
-        }
-
-        System.out.println(textFromBreadcrumbs);
-
-        return textFromBreadcrumbs;
-    }
 }

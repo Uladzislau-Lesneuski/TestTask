@@ -45,6 +45,7 @@ public class TestTaskTests {
     @Test
     public void navigateThroughSeveralMainMenuItems() {
         basePage = new BasePage();
+        contentPage = new ContentPage();
         leadershipPage= new OurLeadershipPage();
         fuelEconomyPage= new FuelEconomyPage();
         patentsAndTestCenterPage = new PatentsAndTestCenterPage();
@@ -54,37 +55,37 @@ public class TestTaskTests {
         benefitsPage = new BenefitsPage();
 
         basePage.goToOurLeadershipPage();
-        Assert.assertEquals(leadershipPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertEquals(leadershipPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 leadershipPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToFuelEconomyPage();
-        Assert.assertEquals(fuelEconomyPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertEquals(fuelEconomyPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 fuelEconomyPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToPatentsAndTestCenterPage();
-        Assert.assertEquals(patentsAndTestCenterPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertEquals(patentsAndTestCenterPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 patentsAndTestCenterPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToCorrosivesPage();
-        Assert.assertEquals(corrosivesPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertEquals(corrosivesPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 corrosivesPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToProductPortfolioPage();
-        Assert.assertEquals(productPortfolioPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertEquals(productPortfolioPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 productPortfolioPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToBenefitsPage();
-        Assert.assertEquals(benefitsPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertEquals(benefitsPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 benefitsPage.getBreadCrumbs()), "Orders and names of breadcrumbs should be equal");
         driver.navigate().back();
 
         basePage.goToTestPage();
-        Assert.assertNotEquals(testPage.getExpectedOrder(), basePage.checkBreadcrumbsOrder(
+        Assert.assertNotEquals(testPage.getExpectedOrder(), contentPage.checkBreadcrumbsOrder(
                 testPage.getBreadCrumbs()), "Bread crumbs contain different headers");
 
     }
@@ -94,6 +95,7 @@ public class TestTaskTests {
         basePage = new BasePage();
 
         List<String> links = basePage.collectAllLinks();
+
         Assert.assertFalse(basePage.checkLinksResponse(links), "Main menu items contain broken links");
     }
 
@@ -106,6 +108,7 @@ public class TestTaskTests {
         contentPage.scrollToSendMoreInformationForm();
         contentPage.fillFormWithRandomData();
         contentPage.submitForm();
+
         Assert.assertTrue(contentPage.isContactUsFormSendSuccessfully(),
                 "Contact us page should sends successfully");
     }
@@ -117,9 +120,13 @@ public class TestTaskTests {
 
         basePage.goToDealerPage();
         String searchQuery = "truck";
-        findDealerPage.searchItem(searchQuery);
+        findDealerPage.enterSearchString(searchQuery);
+
         Assert.assertTrue(findDealerPage.isResultsContainEnteredString(searchQuery),
                 "Result of search should be correct");
+        Assert.assertTrue(findDealerPage.isSearchWithRandomDataGetEmptyResult(),
+                "Search with random data should return empty result");
+
 
     }
 
@@ -133,10 +140,12 @@ public class TestTaskTests {
 
         findDealerPage.setSliderToMaxPosition();
         int maxQuantity = findDealerPage.getSearchItemsQuantity();
+
         Assert.assertNotEquals(initialQuantity, maxQuantity, "Quantity of search items should be different");
 
         findDealerPage.setSliderToDefaultPosition();
         int newQuantity = findDealerPage.getSearchItemsQuantity();
+
         Assert.assertEquals(initialQuantity, newQuantity, "Quantities should be equal");
     }
 
