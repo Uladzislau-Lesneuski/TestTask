@@ -46,16 +46,10 @@ public class ContentPage extends BasePage {
     @FindBy (id = "ContentPlaceHolderFooter_TADBF704B033_ctl00_ctl00_successMessage")
     WebElement successMessage;
 
-    @FindAll({
-            @FindBy (xpath = "//li[@class='rsmItem sfBreadcrumbNavigation']/a")
-    })
-    List<WebElement> breadCrumbs;
-
     public void scrollToSendMoreInformationForm() {
         wait.until(ExpectedConditions.visibilityOf(titleOfForm));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", titleOfForm);
     }
-
 
     public void fillFormWithRandomData() {
         Select choice, country;

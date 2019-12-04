@@ -19,8 +19,8 @@ public class FindDealerPage extends BasePage {
     @FindBy (id = "ContentPlaceHolderContent_C001_txtSourceZip")
     WebElement locationField;
 
-    @FindBy (xpath = "//h2/a[contains(text(), 'Truck')]")
-    WebElement truckItem;
+    @FindBy (xpath = "//h2/a")
+    WebElement foundItems;
 
     @FindBy (id = "ContentPlaceHolderContent_C001_lblDealerCount")
     WebElement quantityOfSearchItems;
@@ -42,9 +42,10 @@ public class FindDealerPage extends BasePage {
     @FindBy (xpath = "//div[@class='rs_tooltip']/span")
     WebElement sliderValue;
 
-
-    public boolean isTruckItemDisplayed() {
-        return truckItem.isDisplayed();
+    public boolean isResultsContainEnteredString(String searchQuery) {
+        wait.until(ExpectedConditions.visibilityOf(foundItems));
+        System.out.println(foundItems.getText());
+        return foundItems.getText().contains(searchQuery);
     }
 
     public void searchItem(String searchItem) {
@@ -61,14 +62,22 @@ public class FindDealerPage extends BasePage {
         builder.moveToElement(slider).clickAndHold()
                 .moveByOffset((sliderRadius.getSize().getWidth()), 0)
                 .release().perform();
-        wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setSliderToDefaultPosition() {
         builder.moveToElement(slider).clickAndHold()
                 .moveByOffset(-(sliderRadius.getSize().getWidth() / 2), 0)
                 .release().perform();
-        wait.until(ExpectedConditions.visibilityOf(quantityOfSearchItems));
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -109,4 +118,5 @@ public class FindDealerPage extends BasePage {
     public boolean isSliderInDefaultPosition() {
         return (Integer.parseInt(sliderValue.getText().split(" ")[0]) == 500);
     }
+
 }

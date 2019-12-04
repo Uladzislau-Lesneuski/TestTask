@@ -49,9 +49,6 @@ public class BasePage {
     @FindBy (css = "li.dropdown a[href='/work-with-wabash']")
     WebElement workWithWabashSection;
 
-    @FindBy (css = "li a[href='/timeline']")
-    WebElement timeLineSection;
-
     @FindBy (css = "li.dropdown a[href='/location-search']")
     WebElement locationSearchSection;
 
@@ -84,21 +81,10 @@ public class BasePage {
     @FindBy (css = "li.dropdown a[href='/location-search/test']")
     WebElement testLink;
 
-    @FindAll({
-            @FindBy (css = "ul[id*='childNodesContainer'] a")
-            //@FindBy (xpath = "//ul[contains(@id, 'childNodesContainer')]//li")
-    })
-    List<WebElement> dropDownItems;
-
     @FindBy (css = "a[href='/location-search/dealer']")
     WebElement dealerLink;
 
-    @FindAll({
-            @FindBy(xpath = "//li[@class='rsmItem sfBreadcrumbNavigation']/a")
-    })
-    List<WebElement> breadCrumbs;
-
-    public static String generateRandomString(int length) {
+    public String generateRandomString(int length) {
         Random random = new Random();
         String lower = "abcdefghijklmnopqrstuvwxyz";
         String upper = lower.toUpperCase();
@@ -154,43 +140,6 @@ public class BasePage {
             }
         }
         return flag;
-    }
-
-    public void navigateThroughRandomItemsFromEachSection() {
-        Random random = new Random();
-        List<WebElement> subCategory;
-        int count = 0;
-
-
-        for (WebElement sections: allMenuLinks) {
-
-            System.out.println("Section name: " + sections.getText() + "->");
-            builder.moveToElement(sections).perform();
-
-            subCategory = sections.findElements(By.cssSelector("ul[id*='childNodesContainer'] a"));
-            //childItems = sections.findElements(By.xpath("//ul[contains(@id, 'childNodesContainer')]//a"));
-
-            for (int i = 0; i < subCategory.size(); i++) {
-                builder.moveToElement(subCategory.get(i)).perform();
-                System.out.print("***" + subCategory.get(i).getText() + " : ");
-                System.out.println();
-                count++;
-            }
-
-            int range = count;
-
-//            int index = random.nextInt(range - 0) + 0;
-//
-//            childItems.get(index).click();
-//            driver.navigate().back();
-
-            System.out.println("Number of subelements is " + range);
-
-            System.out.println();
-            count = 0;
-
-        }
-        System.out.println();
     }
 
     public void goToContentPage() {

@@ -115,8 +115,9 @@ public class TestTaskTests {
         findDealerPage = new FindDealerPage();
 
         basePage.goToDealerPage();
-        findDealerPage.searchItem("truck");
-        Assert.assertTrue(findDealerPage.isTruckItemDisplayed(), "Result of search should be correct");
+        String searchQuery = "truck";
+        findDealerPage.searchItem(searchQuery);
+        Assert.assertTrue(findDealerPage.isResultsContainEnteredString(searchQuery), "Result of search should be correct");
 
     }
 
